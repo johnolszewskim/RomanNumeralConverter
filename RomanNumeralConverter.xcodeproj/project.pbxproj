@@ -14,6 +14,9 @@
 		3167EF332B82DD8B003445E8 /* RomanNumeralConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167EF322B82DD8B003445E8 /* RomanNumeralConverterTests.swift */; };
 		3167EF3D2B82DD8B003445E8 /* RomanNumeralConverterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167EF3C2B82DD8B003445E8 /* RomanNumeralConverterUITests.swift */; };
 		3167EF3F2B82DD8B003445E8 /* RomanNumeralConverterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167EF3E2B82DD8B003445E8 /* RomanNumeralConverterUITestsLaunchTests.swift */; };
+		3167EF4C2B82E0EA003445E8 /* RomanNumeralConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167EF4B2B82E0EA003445E8 /* RomanNumeralConverter.swift */; };
+		3167EF4D2B82E0EA003445E8 /* RomanNumeralConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167EF4B2B82E0EA003445E8 /* RomanNumeralConverter.swift */; };
+		3167EF4E2B82E0EA003445E8 /* RomanNumeralConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167EF4B2B82E0EA003445E8 /* RomanNumeralConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,7 @@
 		3167EF382B82DD8B003445E8 /* RomanNumeralConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RomanNumeralConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3167EF3C2B82DD8B003445E8 /* RomanNumeralConverterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanNumeralConverterUITests.swift; sourceTree = "<group>"; };
 		3167EF3E2B82DD8B003445E8 /* RomanNumeralConverterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanNumeralConverterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3167EF4B2B82E0EA003445E8 /* RomanNumeralConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanNumeralConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				3167EF212B82DD8A003445E8 /* RomanNumeralConverterApp.swift */,
+				3167EF4B2B82E0EA003445E8 /* RomanNumeralConverter.swift */,
 				3167EF232B82DD8A003445E8 /* ContentView.swift */,
 				3167EF252B82DD8B003445E8 /* Assets.xcassets */,
 				3167EF272B82DD8B003445E8 /* Preview Content */,
@@ -259,6 +264,7 @@
 			files = (
 				3167EF242B82DD8A003445E8 /* ContentView.swift in Sources */,
 				3167EF222B82DD8A003445E8 /* RomanNumeralConverterApp.swift in Sources */,
+				3167EF4C2B82E0EA003445E8 /* RomanNumeralConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3167EF332B82DD8B003445E8 /* RomanNumeralConverterTests.swift in Sources */,
+				3167EF4D2B82E0EA003445E8 /* RomanNumeralConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +283,7 @@
 			files = (
 				3167EF3F2B82DD8B003445E8 /* RomanNumeralConverterUITestsLaunchTests.swift in Sources */,
 				3167EF3D2B82DD8B003445E8 /* RomanNumeralConverterUITests.swift in Sources */,
+				3167EF4E2B82E0EA003445E8 /* RomanNumeralConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
