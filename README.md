@@ -1,3 +1,5 @@
+<img src="https://github.com/johnolszewskim/RomanNumeralConverter/assets/126525927/e58c5d75-79c2-4ade-a81f-9ba4d9bbb07f" height="600">
+
 # About
 
 The Arabic Number to Roman Numeral conversion algorithm was given to me during an in-person, group iOS engineering interview.
