@@ -12,59 +12,154 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @State var enteredNumber: String = ""
-    @State var toRomanNumeral: Bool = true
+    @State var toRomanNumeral: Bool = false
+    @State var conversion = Conversion.toRomanNumeral
     
-    var romanNumeral: String = ""
+    let romanNumerals = ["I","V","X","L","C","D","M"]
+    let digits = ["1","2","3","4","5","6","7","8","9","0"]
+    let conversionOptions = ["to RomanNumeral", "to Arabic"]
+    
+    private var gridItemLayout = [GridItem(.adaptive(minimum: 100)),
+                                  GridItem(.adaptive(minimum: 100)),
+                                  GridItem(.adaptive(minimum: 100)),
+                                  GridItem(.adaptive(minimum: 100))]
     
     var body: some View {
         
         NavigationStack{
-            
             ZStack {
-                
+            
                 LinearGradient(colors: [.backgroundStart, .backgroundEnd], startPoint: .top, endPoint: .bottom)
-                
-                VStack(alignment: .leading){
-                    Spacer()
+                    .ignoresSafeArea()
+            
+                VStack(alignment: .leading) {
                     
-                    ZStack(alignment: .center) {
-                        
-                        VStack {
-                            Toggle(toRomanNumeral ? "to Roman Numerals" : "to Arabic", isOn: $toRomanNumeral)
-                                .padding([.horizontal, .top], 10)
-                            
-                            Divider()
-                                .padding(.horizontal, 30)
-                            
-                            TextField("Enter an integer", text: $enteredNumber)
-                                .textFieldStyle(.automatic)
-                                .keyboardType(.numberPad)
-                                .frame(width: 200)
-                                .multilineTextAlignment(.center)
-                                .font(.custom("system", size: 20))
-                                .padding([.bottom], 10)
+                    //MARK: - Picker -
+                    
+                    Picker("Conversion", selection: $conversion) {
+                        ForEach(Conversion.allCases, id: \.self) { conversion in
+                            Text("\(conversion.rawValue)")
                         }
                     }
-                    .background(.stackBackground)
-                    .cornerRadius(20)
-                    .padding([.horizontal], 30)
+                    .pickerStyle(.segmented)
+                    .onChange(of: conversion) {
+                        enteredNumber = ""
+                    }
+                    
+                    //MARK: --
+
                     Spacer()
-                    Spacer()
+                    
+                    //MARK: - Entered Number and Line -
+                    
+                    VStack(alignment: .leading, spacing: 0){
+                        Text(enteredNumber)
+                            .font(.title.weight(.semibold))
+                            .foregroundStyle(.white)
+
+                        RoundedRectangle(cornerRadius: 5)
+                            .frame(maxWidth: .infinity, maxHeight: 5)
+                            .foregroundColor(.white)
+                            .containerRelativeFrame(.horizontal, count: 5, span: 3, spacing: 10)
+                    }
+                    
+                    //MARK: - Keyboard -
+                    
+                    VStack {
+                        
+                        // rows with enough
+                        LazyVGrid(columns: gridItemLayout, alignment: .center) {
+                            ForEach(conversion == Conversion.toRomanNumeral ? digits : romanNumerals, id: \.self) { rN in
+                                
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .foregroundStyle(.keyBackground)
+                                        .aspectRatio(1, contentMode: .fit)
+                                        .onTapGesture {
+                                            enteredNumber += rN
+                                        }
+                                    
+                                    Text("\(rN)")
+                                        .font(.system(size: 24))
+                                        .bold()
+                                }
+                            }
+                            
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundStyle(.keyBackground)
+                                    .aspectRatio(1, contentMode: .fit)
+                                    .onTapGesture {
+                                        enteredNumber = String(enteredNumber.dropLast(1))
+                                    }
+                                
+                                Image(systemName: "delete.left.fill")
+                                    .tint(.white)
+                            }
+                        }
+                        .padding()
+                        
+                        
+//                        HStack {
+//                            ForEach(conversion == Conversion.toRomanNumeral ? digits.suffix(digits.count % 4) : romanNumerals.suffix(romanNumerals.count % 4), id: \.self) { rN in
+//                                ZStack {
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .foregroundStyle(.keyBackground)
+//                                        .aspectRatio(1, contentMode: .fit)
+//                                        .onTapGesture {
+//                                            enteredNumber += rN
+//                                        }
+//                                    
+//                                    Text("\(rN)")
+//                                        .font(.system(size: 24))
+//                                        .bold()
+//                                }
+//                            }
+//                            
+//                            ZStack {
+//                                RoundedRectangle(cornerRadius: 10)
+//                                    .foregroundStyle(.keyBackground)
+//                                    .aspectRatio(1, contentMode: .fit)
+//                                    .onTapGesture {
+//                                        enteredNumber = String(enteredNumber.dropLast(1))
+//                                    }
+//                                
+//                                Image(systemName: "delete.left.fill")
+//                                    .tint(.white)
+//                            }
+//                        }
+//                        .padding([.horizontal])
+                    }
+                    .background {
+                        Color.keyboardBackground.opacity(0.5)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
                 }
+                .padding()
                 
-                VStack(alignment: .center) {
-                    Text(toRomanNumeral ? RomanNumeralConverter.convert(Int(enteredNumber) ?? 0) : "to Arabic")
+                //MARK: - Conversion Text -
+                
+                VStack {
+                    Spacer()
+                    Text(conversion == Conversion.toRomanNumeral ? RomanNumeral.shared.convertToRomanNumeral(from: enteredNumber) ?? "" : RomanNumeral.shared.convertToArabicNumber(from: enteredNumber) ?? "")
                         .font(.custom("Times", size: 76))
                         .foregroundStyle(.white)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
                         .minimumScaleFactor(0.1)
                         .padding(.horizontal)
+                    Spacer()
+                    Spacer()
                 }
             }
-            .ignoresSafeArea()
             .navigationTitle("Number Converter")
+
         }
+    }
+    
+    enum Conversion: String, CaseIterable {
+        case toRomanNumeral = "to Roman Numeral"
+        case toArabic = "to Arabic"
     }
 }
 
